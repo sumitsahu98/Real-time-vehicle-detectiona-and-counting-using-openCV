@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Counting</title>
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            padding: 20px;
+            color: white;
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: stretch;
+            padding: 20px;
+            gap: 20px;
+        }
+
+        /* Count Section */
+        .count {
+            flex: 1;
+            max-width: 300px;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            color: white;
+            text-align: center;
+        }
+
+        .count h2 {
+            margin-top: 0;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .counter-box {
+            background: rgba(255,255,255,0.15);
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.2);
+            transition: transform 0.2s ease, background 0.3s ease;
+        }
+
+        .counter-box:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.25);
+        }
+
+        .counter-box p {
+            margin: 0;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .counter-value {
+            display: block;
+            font-size: 34px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        /* Video Section */
+        .video {
+            flex: 2;
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video h2 {
+            margin-top: 0;
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+
+        #live-video {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            border-radius: 12px;
+            border: 2px solid #ccc;
+            object-fit: contain;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .count {
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Real-Time Vehicle Counting</h1>
+    </header>
+
+    <div class="container">
+
+        <!-- Count Section -->
+        <div class="count">
+            <h2>Vehicle Counts</h2>
+            
+            <div class="counter-box">
+                <p>Left Side Vehicles</p>
+                <span id="left-count" class="counter-value">0</span>
+            </div>
+            
+            <div class="counter-box">
+                <p>Right Side Vehicles</p>
+                <span id="right-count" class="counter-value">0</span>
+            </div>
+
+            <!-- Total Vehicle Counter -->
+            <div class="counter-box" style="background: rgba(255,255,255,0.25);">
+                <p>Total Vehicles</p>
+                <span id="total-count" class="counter-value">0</span>
+            </div>
+        </div>
+
+        <!-- Video Section -->
+        <div class="video">
+            <h2>Live Video Feed</h2>
+            <!-- Flask will serve video here -->
+            <img id="live-video" src="/video_feed" alt="Live Video Feed">
+        </div>
+
+    </div>
+
+    <script>
+        // Fetch updated vehicle counts every second
+        setInterval(() => {
+            fetch('/get_counts')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('left-count').textContent = data.left;
+                    document.getElementById('right-count').textContent = data.right;
+                    // Calculate total
+                    document.getElementById('total-count').textContent = data.left + data.right;
+                })
+                .catch(error => {
+                    console.error('Error fetching vehicle counts:', error);
+                });
+        }, 1000);
+    </script>
+</body>
+</html>

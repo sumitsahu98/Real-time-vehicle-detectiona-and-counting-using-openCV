@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Features</title>
+    <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <h1>Features Page</h1>
+        </header>
+        <main>
+            <div class="card">
+                <i class="fas fa-camera"></i>
+                <button id="camera-btn">Open Camera</button>
+            </div>
+            <div class="card">
+                <i class="fas fa-upload"></i>
+                <button id="upload-btn">Upload Video</button>
+            </div>
+            <div class="card">
+                <i class="fas fa-video"></i>
+                <button id="capture-btn">Capture Video</button>
+            </div>
+            <a href="remaining.html" class="next-page-btn">Go to Remaining Features</a>
+            <button id="logout-btn" class="logout-btn">Logout</button>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="script.js"></script>
+</body>
+</html>

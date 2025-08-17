@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remaining Features</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+<body>
+    <div class="dashboard">
+        <header>
+            <h2>Remaining Features</h2>
+            <button id="logout-btn" class="logout-btn">Logout</button>
+        </header>
+        <main>
+            <p class="coming-soon">New features coming soon! Stay tuned.</p>
+            <a href="features.html" class="back-btn">Back to Features</a>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="script.js"></script>
+</body>
+</html>
