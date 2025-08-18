@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Run Python Script</title>
+    <script>
+        function sendData() {
+            const data = document.getElementById("inputData").value;
+            fetch('/run-script', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: new URLSearchParams({ data })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("output").innerText = data.result;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</head>
+<body>
+    <h1>Run Python Script</h1>
+    <input type="text" id="inputData" placeholder="Enter some text">
+    <button onclick="sendData()">Submit</button>
+    <h2>Output:</h2>
+    <p id="output"></p>
+</body>
+</html>

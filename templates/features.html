@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Features</title>
-    <link rel="stylesheet" href="style.css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-
+    <!-- Only use Flask static URL to avoid duplicate CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
     <div class="dashboard">
@@ -26,12 +25,11 @@
                 <i class="fas fa-video"></i>
                 <button id="capture-btn">Capture Video</button>
             </div>
-            
-            <a href="remaining.html" class="next-page-btn">Go to Remaining Features</a>
+            <a href="{{ url_for('static', filename='templates/remaining.html') }}" class="next-page-btn">Go to Remaining Features</a>
             <button id="logout-btn" class="logout-btn">Logout</button>
         </main>
     </div>
+    <!-- Only use Flask static URL to include JS -->
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <script src="script.js"></script>
 </body>
 </html>
